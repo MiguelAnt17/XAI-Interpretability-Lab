@@ -1,0 +1,30 @@
+# Data manipulation and analysis
+pandas>=1.5.0
+numpy>=1.23.0
+
+# Visualization
+seaborn>=0.12.0
+matplotlib>=3.6.0
+
+# Machine Learning
+scikit-learn>=1.2.0
+
+# Deep Learning and NLP
+torch>=2.0.0
+transformers>=4.30.0
+
+# Translation
+deep-translator>=1.11.0
+
+# NLP Processing
+spacy>=3.5.0
+
+# Explainability
+lime>=0.2.0
+
+# Progress bars
+tqdm>=4.65.0
+
+# Jupyter notebook support (optional, for running notebooks)
+ipython>=8.10.0
+jupyter>=1.0.0
