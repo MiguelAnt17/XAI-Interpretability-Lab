@@ -4,7 +4,7 @@ Este projeto aplica técnicas de **Inteligência Artificial Explicável (XAI)**,
 
 O objetivo principal não é apenas classificar as mensagens com precisão, mas também **entender e explicar** por que os modelos tomam determinadas decisões, identificando palavras-chave e padrões linguísticos que influenciam na detecção de desinformação.
 
-## 🚀 Funcionalidades Principais
+## Funcionalidades Principais
 
 *   **Pré-processamento Avançado de Texto**: Pipeline robusto que trata emojis, gírias de internet (ex: "kkk"), pontuação, stopwords e realiza lematização.
 *   **Treinamento Multi-modelo**: Comparação de desempenho de diversos algoritmos de classificação:
@@ -25,7 +25,7 @@ O objetivo principal não é apenas classificar as mensagens com precisão, mas 
 *   `requirements.txt`: Lista de dependências do projeto.
 *   `outputs/`: (Gerado na execução) Contém relatórios de classificação, gráficos e logs.
 
-## 🛠️ Instalação e Uso
+## Instalação e Uso
 
 ### Pré-requisitos
 
@@ -62,7 +62,7 @@ O projeto gera diversas visualizações para auxiliar na interpretação:
 *   **Gráfico de Viés**: Compara o F1-Score entre classes reais e fake para todos os modelos.
 *   **Ranking de Palavras**: Identifica os termos mais frequentes e influentes em cada classe.
 
-## 📝 Autor
+## Autor
 
 **Miguel Maurício António**
 *   Projeto desenvolvido no contexto de pesquisa em NLP e XAI.
