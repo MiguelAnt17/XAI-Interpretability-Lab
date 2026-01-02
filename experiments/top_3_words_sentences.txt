@@ -1,5 +1,5 @@
 RELATÓRIO DE AUDITORIA DE PALAVRAS
-Total de palavras analisadas: 17
+Total de palavras analisadas: 18
 ============================================================
 
 PALAVRA: '15'
@@ -46,6 +46,14 @@ Ocorrências encontradas: 2
 ----------------------------------------
 [Doc ID 6]: o alkmin atacar mito tudo...
 [Doc ID 769]: o bruxa solto , acabar atacar outro deputado federal...
+
+============================================================
+
+PALAVRA: 'comentário'
+Ocorrências encontradas: 2
+----------------------------------------
+[Doc ID 173]: menina coloquem linkr grupo todo comentário feminino favor bolsonaro...
+[Doc ID 387]: comentário nordestino após entrevista Bolsonaro ontem globolixo...
 
 ============================================================
 

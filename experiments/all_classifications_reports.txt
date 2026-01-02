@@ -40,8 +40,8 @@ weighted avg       0.65      0.65      0.65       918
 MODELO: SGD
               precision    recall  f1-score   support
 
-           0       0.66      0.74      0.70       510
-           1       0.61      0.52      0.56       408
+           0       0.66      0.75      0.70       510
+           1       0.62      0.51      0.56       408
 
     accuracy                           0.64       918
    macro avg       0.64      0.63      0.63       918
@@ -76,12 +76,12 @@ weighted avg       0.63      0.63      0.63       918
 MODELO: Random Forest
               precision    recall  f1-score   support
 
-           0       0.69      0.81      0.74       510
-           1       0.69      0.54      0.60       408
+           0       0.68      0.77      0.72       510
+           1       0.65      0.54      0.59       408
 
-    accuracy                           0.69       918
-   macro avg       0.69      0.67      0.67       918
-weighted avg       0.69      0.69      0.68       918
+    accuracy                           0.67       918
+   macro avg       0.66      0.65      0.65       918
+weighted avg       0.66      0.67      0.66       918
 
 ------------------------------------------------------------
 
@@ -89,22 +89,22 @@ MODELO: Gradient Boosting
               precision    recall  f1-score   support
 
            0       0.62      0.85      0.72       510
-           1       0.65      0.34      0.45       408
+           1       0.66      0.35      0.46       408
 
     accuracy                           0.63       918
-   macro avg       0.64      0.60      0.58       918
-weighted avg       0.63      0.63      0.60       918
+   macro avg       0.64      0.60      0.59       918
+weighted avg       0.64      0.63      0.60       918
 
 ------------------------------------------------------------
 
 MODELO: MLP
               precision    recall  f1-score   support
 
-           0       0.66      0.76      0.71       510
-           1       0.63      0.50      0.56       408
+           0       0.66      0.74      0.70       510
+           1       0.62      0.53      0.57       408
 
     accuracy                           0.65       918
-   macro avg       0.64      0.63      0.63       918
+   macro avg       0.64      0.63      0.64       918
 weighted avg       0.64      0.65      0.64       918
 
 ------------------------------------------------------------
