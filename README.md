@@ -108,6 +108,7 @@ outputs = model.generate(
 
 print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 # Output esperado: "O ministro não assinou o decreto ontem."
+```
 
 ## Resultados e Visualizações
 
