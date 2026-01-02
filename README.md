@@ -1,4 +1,4 @@
-# XAI - LIME: Detecção de Fake News em Mensagens de WhatsApp 📱🔍
+# XAI - LIME: Detecção de Fake News em Mensagens de WhatsApp 
 
 Este projeto aplica técnicas de **Inteligência Artificial Explicável (XAI)**, especificamente **LIME (Local Interpretable Model-agnostic Explanations)**, para analisar e classificar mensagens de Fake News do WhatsApp em Português.
 
@@ -17,7 +17,7 @@ O objetivo principal não é apenas classificar as mensagens com precisão, mas 
 *   **Análise de Viés (Bias Analysis)**: Visualização gráfica da discrepância de desempenho (F1-score) entre classes para identificar vieses nos modelos.
 *   **Métricas de Confiança**: Avaliação da estabilidade e fidelidade das explicações geradas pelo LIME.
 
-## 📂 Estrutura do Repositório
+## Estrutura do Repositório
 
 *   `experiments_final.ipynb`: Notebook Jupyter principal contendo todo o fluxo de execução, desde o carregamento dos dados até a geração de explicações e gráficos.
 *   `utils.py`: Módulo Python com funções auxiliares encapsuladas para limpeza de texto, vetorização, avaliação de modelos e visualização.
@@ -53,7 +53,7 @@ pip install -r requirements.txt
     ```
 3.  Execute as células sequencialmente para reproduzir os experimentos.
 
-## 📊 Resultados e Visualizações
+## Resultados e Visualizações
 
 O projeto gera diversas visualizações para auxiliar na interpretação:
 
