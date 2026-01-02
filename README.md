@@ -53,6 +53,62 @@ pip install -r requirements.txt
     ```
 3.  Execute as células sequencialmente para reproduzir os experimentos.
 
+## Model Card - Counterfactual Explanations
+---
+language:
+- pt
+license: mit
+tags:
+- ptt5
+- xai
+- counterfactuals
+- polyjuice
+- synthetic-data
+datasets:
+- assin2
+base_model: unicamp-dl/ptt5-base-portuguese-vocab
+---
+
+### PTT5-Student for Counterfactual Generation (Portuguese)
+
+Este modelo é um **gerador de explicações contrafactuais** para a língua portuguesa. É uma versão *fine-tuned* do modelo [PTT5-Base](https://huggingface.co/unicamp-dl/ptt5-base-portuguese-vocab), treinado utilizando a técnica de *Knowledge Distillation*.
+
+O modelo atua como um "Student", tendo aprendido a gerar perturbações textuais a partir de um dataset sintético criado pelo **Gemini 1.5 Flash** (Teacher), seguindo a taxonomia de controlo do método *Polyjuice*.
+
+## 🎯 Intended Use
+Este modelo foi desenvolvido no âmbito de uma Tese de Mestrado sobre **Causalidade e XAI (Explainable AI)**. O seu objetivo é servir como mecanismo de perturbação para métodos de explicabilidade, gerando variações de frases baseadas em códigos de controlo.
+
+**Códigos Suportados:**
+* `[negation]`: Adiciona/remove negação.
+* `[quantifier]`: Altera quantidades/números.
+* `[lexical]`: Substitui palavras por sinónimos/antónimos.
+* `[insert]`: Adiciona informação/adjetivos.
+* `[delete]`: Remove informação não essencial.
+* `[restructure]`: Altera a voz ou estrutura sintática.
+
+## How to Use
+
+```python
+from transformers import T5Tokenizer, T5ForConditionalGeneration
+
+model_name = "oteuuser/ptt5-polyjuice-student" # Substituir pelo teu path
+tokenizer = T5Tokenizer.from_pretrained(model_name)
+model = T5ForConditionalGeneration.from_pretrained(model_name)
+
+# Input format: "gerar contrafactual [codigo]: frase"
+input_text = "gerar contrafactual [negation]: O ministro assinou o decreto ontem."
+
+inputs = tokenizer(input_text, return_tensors="pt")
+outputs = model.generate(
+    inputs.input_ids, 
+    max_length=128, 
+    num_beams=5, 
+    early_stopping=True
+)
+
+print(tokenizer.decode(outputs[0], skip_special_tokens=True))
+# Output esperado: "O ministro não assinou o decreto ontem."
+
 ## Resultados e Visualizações
 
 O projeto gera diversas visualizações para auxiliar na interpretação:
