@@ -7,7 +7,7 @@ O objetivo principal não é apenas classificar as mensagens com precisão, mas 
 ## Funcionalidades Principais
 
 *   **Pré-processamento Avançado de Texto**: Pipeline robusto que trata emojis, gírias de internet (ex: "kkk"), pontuação, stopwords e realiza lematização.
-*   **Treinamento Multi-modelo**: Comparação de desempenho de diversos algoritmos de classificação:
+*   **Treino Multi-modelo**: Comparação de desempenho de diversos algoritmos de classificação:
     *   Logistic Regression
     *   Random Forest
     *   Support Vector Machine (SVM)
