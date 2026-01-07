@@ -21,18 +21,16 @@ scikit-learn>=1.2.0
 torch>=2.0.0
 transformers>=4.30.0
 spacy>=3.5.0
+nltk
+emoji
 
 # =========================
-# NLP Utilities
+# NLP Evaluation & Utilities
 # =========================
 deep-translator>=1.11.0
 Levenshtein
 bert-score
 evaluate
-emoji
-nltk
-spacy download pt_core_news_sm
-pip install -q -U google-generativeai
 
 # =========================
 # Explainability
@@ -43,10 +41,15 @@ lime>=0.2.0
 # Progress & Utilities
 # =========================
 tqdm>=4.65.0
+python-dotenv
 
 # =========================
 # Jupyter / Interactive (optional)
 # =========================
 ipython>=8.10.0
 jupyter>=1.0.0
-dotenv
+
+# =========================
+# LLM APIs
+# =========================
+google-generativeai
