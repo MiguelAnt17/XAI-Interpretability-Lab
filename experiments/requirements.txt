@@ -1,30 +1,52 @@
-# Data manipulation and analysis
-pandas>=1.5.0
+# =========================
+# Core Data & Math
+# =========================
 numpy>=1.23.0
+pandas>=1.5.0
 
+# =========================
 # Visualization
-seaborn>=0.12.0
+# =========================
 matplotlib>=3.6.0
+seaborn>=0.12.0
 
+# =========================
 # Machine Learning
+# =========================
 scikit-learn>=1.2.0
 
-# Deep Learning and NLP
+# =========================
+# Deep Learning & NLP
+# =========================
 torch>=2.0.0
 transformers>=4.30.0
-
-# Translation
-deep-translator>=1.11.0
-
-# NLP Processing
 spacy>=3.5.0
 
+# =========================
+# NLP Utilities
+# =========================
+deep-translator>=1.11.0
+Levenshtein
+bert-score
+evaluate
+emoji
+nltk
+spacy download pt_core_news_sm
+pip install -q -U google-generativeai
+
+# =========================
 # Explainability
+# =========================
 lime>=0.2.0
 
-# Progress bars
+# =========================
+# Progress & Utilities
+# =========================
 tqdm>=4.65.0
 
-# Jupyter notebook support (optional, for running notebooks)
+# =========================
+# Jupyter / Interactive (optional)
+# =========================
 ipython>=8.10.0
 jupyter>=1.0.0
+dotenv

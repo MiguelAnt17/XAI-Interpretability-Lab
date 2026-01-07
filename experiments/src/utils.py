@@ -1190,7 +1190,7 @@ def calculate_jaccard(set_a, set_b):
     return intersection / union
 
 
-def plot_models_metrics(models_results, save_path='model_comparison.png'):
+def plot_models_metrics(models_results, save_path):
     """
     Cria um gráfico de barras comparando métricas de múltiplos modelos.
     
@@ -1289,6 +1289,116 @@ def plot_models_metrics(models_results, save_path='model_comparison.png'):
     print(df.to_string(index=False))
     
     return fig, ax, df
+
+
+
+
+
+
+import torch
+import numpy as np
+import pandas as pd
+import Levenshtein
+from bert_score import score as bert_score
+from evaluate import load
+from tqdm import tqdm
+
+# ==========================================
+# FUNÇÕES AUXILIARES DE MÉTRICAS
+# ==========================================
+
+def jaccard_similarity(str1, str2):
+    a = set(str1.split())
+    b = set(str2.split())
+    if not a and not b: return 1.0
+    return len(a & b) / len(a | b)
+
+def calculate_perplexity(texts, model_id='gpt2'):
+    """Calcula a fluidez do texto. Requer modelo de linguagem externo."""
+    perplexity_metric = load("perplexity", module_type="metric")
+    results = perplexity_metric.compute(model_id=model_id, add_start_token=False, predictions=texts)
+    return results['mean_perplexity']
+
+# ==========================================
+# PIPELINE DE AVALIAÇÃO DE XAI
+# ==========================================
+
+def evaluate_xai_counterfactuals(df_eval, ptt5_model, ptt5_tokenizer, classifier, vectorizer):
+    """
+    df_eval: DataFrame com ['original_text', 'target_code']
+    classifier: O seu modelo original (Random Forest/MLP)
+    vectorizer: O TF-IDF vectorizer usado no treino do classificador
+    """
+    results = []
+    generated_texts = []
+    
+    print("A gerar contrafactuais e a calcular métricas...")
+    
+    for _, row in tqdm(df_eval.iterrows(), total=len(df_eval)):
+        orig_text = row['original_text']
+        code = row['target_code'] # ex: [negation]
+        
+        # 1. GERAR CONTRAFACTUAL COM PTT5
+        input_text = f"gerar contrafactual {code}: {orig_text}"
+        inputs = ptt5_tokenizer(input_text, return_tensors="pt", truncation=True, max_length=128).to(ptt5_model.device)
+        
+        with torch.no_grad():
+            outputs = ptt5_model.generate(inputs.input_ids, max_length=128, num_beams=5)
+        gen_text = ptt5_tokenizer.decode(outputs[0], skip_special_tokens=True)
+        generated_texts.append(gen_text)
+
+        # 2. MÉTRICAS LINGUÍSTICAS
+        dist = Levenshtein.distance(orig_text, gen_text)
+        jaccard = jaccard_similarity(orig_text, gen_text)
+        
+        # 3. MÉTRICAS DE CLASSIFICAÇÃO (FLIP RATE & PROB SHIFT)
+        # Transformar textos para o formato do classificador (TF-IDF)
+        orig_vec = vectorizer.transform([orig_text])
+        gen_vec = vectorizer.transform([gen_text])
+        
+        # Predições e Probabilidades
+        orig_prob = classifier.predict_proba(orig_vec)[0]
+        gen_prob = classifier.predict_proba(gen_vec)[0]
+        
+        orig_label = np.argmax(orig_prob)
+        gen_label = np.argmax(gen_prob)
+        
+        # Flip ocorreu se a classe mudou
+        flip = 1 if orig_label != gen_label else 0
+        
+        # Shift: Diferença na confiança da classe original
+        prob_shift = orig_prob[orig_label] - gen_prob[orig_label]
+        
+        results.append({
+            'orig': orig_text,
+            'gen': gen_text,
+            'flip': flip,
+            'prob_shift': prob_shift,
+            'levenshtein': dist,
+            'jaccard': jaccard
+        })
+
+    # 4. MÉTRICAS AGREGADAS (BERTScore e Perplexity)
+    print("A calcular BERTScore...")
+    P, R, F1 = bert_score(generated_texts, [r['orig'] for r in results], lang="pt", verbose=False)
+    
+    print("A calcular Perplexity...")
+    # Nota: gpt2 é base, para PT idealmente seria um modelo PT, mas gpt2 serve de proxy
+    avg_ppl = calculate_perplexity(generated_texts) 
+
+    # FINALIZAR RESULTADOS
+    df_res = pd.DataFrame(results)
+    
+    metrics_summary = {
+        "Flip Rate": df_res['flip'].mean(),
+        "Avg Prob Shift": df_res['prob_shift'].mean(),
+        "Avg Levenshtein": df_res['levenshtein'].mean(),
+        "Avg Jaccard": df_res['jaccard'].mean(),
+        "BERTScore F1": F1.mean().item(),
+        "Perplexity": avg_ppl
+    }
+    
+    return metrics_summary, df_res
 
 
 # ============================================================================

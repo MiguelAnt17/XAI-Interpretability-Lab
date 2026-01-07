@@ -208,5 +208,20 @@
     "frase_base": "Alguém está mexendo a pimenta em uma panela",
     "codigo": "insertion",
     "frase_gerada": "Alguém está mexendo rapidamente a pimenta em uma panela."
+  },
+  {
+    "frase_base": "Uma pessoa está andando em uma motocicleta velha",
+    "codigo": "negation",
+    "frase_gerada": "Uma pessoa não está andando em uma motocicleta velha."
+  },
+  {
+    "frase_base": "Uma pessoa está andando em uma motocicleta velha",
+    "codigo": "substitution",
+    "frase_gerada": "Uma pessoa está andando em um carro velho."
+  },
+  {
+    "frase_base": "Uma pessoa está andando em uma motocicleta velha",
+    "codigo": "insertion",
+    "frase_gerada": "Uma pessoa está andando rapidamente em uma motocicleta velha."
   }
 ]
